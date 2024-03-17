@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+import settings  # Importing settings module
+from django.conf.urls import url  # Importing url function
+from django.views.static import serve  # Importing serve function from django.views.static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
